@@ -59,8 +59,8 @@ func CompareObjects(t *testing.T, expected, reported interface{}, message ...int
 	reportedStr := normalisePointers(spew.Sdump(reported))
 
 	diff := difflib.UnifiedDiff{
-		A:        difflib.SplitLines(expectedStr),
-		B:        difflib.SplitLines(reportedStr),
+		A:        difflib.SplitLines(strings.Replace(expectedStr, "\r", "", -1)),
+		B:        difflib.SplitLines(strings.Replace(reportedStr, "\r", "", -1)),
 		FromFile: "Expected",
 		ToFile:   "Reported",
 		Context:  3,
@@ -107,8 +107,8 @@ func CompareObjectExhibit(t *testing.T, exhibit string, reported interface{}) er
 	expectedStr := string(buf[:])
 
 	diff := difflib.UnifiedDiff{
-		A:        difflib.SplitLines(expectedStr),
-		B:        difflib.SplitLines(reportedStr),
+		A:        difflib.SplitLines(strings.Replace(expectedStr, "\r", "", -1)),
+		B:        difflib.SplitLines(strings.Replace(reportedStr, "\r", "", -1)),
 		FromFile: "Expected",
 		ToFile:   "Reported",
 		Context:  3,
@@ -151,8 +151,8 @@ func CompareJSONExhibit(t *testing.T, exhibit string, reported interface{}) erro
 	reportedStr := string(reportedJson)
 
 	diff := difflib.UnifiedDiff{
-		A:        difflib.SplitLines(expectedStr),
-		B:        difflib.SplitLines(reportedStr),
+		A:        difflib.SplitLines(strings.Replace(expectedStr, "\r", "", -1)),
+		B:        difflib.SplitLines(strings.Replace(reportedStr, "\r", "", -1)),
 		FromFile: "Expected",
 		ToFile:   "Reported",
 		Context:  3,
@@ -191,8 +191,8 @@ func CompareExhibit(t *testing.T, exhibit string, reported string) error {
 	expectedStr := string(buf)
 
 	diff := difflib.UnifiedDiff{
-		A:        difflib.SplitLines(expectedStr),
-		B:        difflib.SplitLines(reported),
+		A:        difflib.SplitLines(strings.Replace(expectedStr, "\r", "", -1)),
+		B:        difflib.SplitLines(strings.Replace(reported, "\r", "", -1)),
 		FromFile: "Expected",
 		ToFile:   "Reported",
 		Context:  3,
